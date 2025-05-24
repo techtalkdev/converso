@@ -2,7 +2,9 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div className='text-2xl underline'>Home</div>
+    <div>
+      <h1>Home</h1>
+    </div>
   )
 }
 
