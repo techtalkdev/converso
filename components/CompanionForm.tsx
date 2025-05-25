@@ -1,9 +1,12 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+
+import { createCompanion } from "@/lib/actions/companion.actions";
 import { Button } from "@/components/ui/button"
+import { redirect } from "next/navigation"
 import {
   Form,
   FormControl,
@@ -49,7 +52,13 @@ const CompanionForm = () => {
   })
  
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
+      const companion = await createCompanion(values);
+      if (companion) {
+          redirect(`/companion/${companion.id}`)
+      } else {
+          console.log("Failed to create companion")
+          redirect('/')
+      }
   }
 
   return (
